@@ -10,6 +10,15 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet var holder: UIView!
+    
+    private var resultArea: UILabel! = {
+        let label = UILabel()
+        label.text = "0" // remove after tests
+        label.textColor = .white
+        label.textAlignment = .right
+        label.font = UIFont(name: "Arial", size: 50)
+        return label
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,40 +34,49 @@ class ViewController: UIViewController {
     private func numberPad() {
         let buttonSize = view.frame.size.width / 5
         
-        
+        	
         let zeroButton = UIButton(frame: CGRect(x:0, y: holder.frame.size.height-buttonSize, width: buttonSize*2, height: buttonSize))
             zeroButton.setTitleColor(.black, for: .normal)
             zeroButton.backgroundColor = .orange
             zeroButton.setTitle("0", for: .normal)
+            zeroButton.tag = 0
+            zeroButton.addTarget(self, action: #selector(numberPressed(_:)), for: .touchUpInside)
             holder.addSubview(zeroButton)
         
         let equalButton = UIButton(frame: CGRect(x:buttonSize * CGFloat(2), y: holder.frame.size.height-buttonSize, width: buttonSize, height: buttonSize))
             equalButton.setTitleColor(.black, for: .normal)
-            equalButton.backgroundColor = .systemGreen
+            equalButton.backgroundColor = .systemMint
             equalButton.setTitle("=", for: .normal)
+            
             holder.addSubview(equalButton)
         
         let oneButton = UIButton(frame: CGRect(x:buttonSize * CGFloat(0), y: holder.frame.size.height-buttonSize*2, width: buttonSize, height: buttonSize))
             oneButton.setTitleColor(.black, for: .normal)
             oneButton.backgroundColor = .orange
             oneButton.setTitle("1", for: .normal)
+            oneButton.tag = 1
+            oneButton.addTarget(self, action: #selector(numberPressed(_:)), for: .touchUpInside)
             holder.addSubview(oneButton)
         
         let twoButton = UIButton(frame: CGRect(x:buttonSize * CGFloat(1), y: holder.frame.size.height-(buttonSize*2), width: buttonSize, height: buttonSize))
             twoButton.setTitleColor(.black, for: .normal)
             twoButton.backgroundColor = .orange
             twoButton.setTitle("2", for: .normal)
+            twoButton.tag = 2
+            twoButton.addTarget(self, action: #selector(numberPressed(_:)), for: .touchUpInside)
             holder.addSubview(twoButton)
     
         let threeButton = UIButton(frame: CGRect(x:buttonSize * CGFloat(2), y: holder.frame.size.height-(buttonSize*2), width: buttonSize, height: buttonSize))
             threeButton.setTitleColor(.black, for: .normal)
             threeButton.backgroundColor = .orange
             threeButton.setTitle("3", for: .normal)
+            threeButton.tag = 3
+            threeButton.addTarget(self, action: #selector(numberPressed(_:)), for: .touchUpInside)
             holder.addSubview(threeButton)
         
         let clearButton = UIButton(frame: CGRect(x:0, y: holder.frame.size.height-(buttonSize*5), width: buttonSize*3, height: buttonSize))
-            clearButton.setTitleColor(.orange, for: .normal)
-            clearButton.backgroundColor = .systemGreen
+            clearButton.setTitleColor(.red, for: .normal)
+            clearButton.backgroundColor = .systemMint
             clearButton.setTitle("Clear", for: .normal)
             holder.addSubview(clearButton)
         
@@ -133,6 +151,8 @@ class ViewController: UIViewController {
             thrirdLineButton.setTitleColor(.black, for: .normal)
             thrirdLineButton.backgroundColor = .orange
             thrirdLineButton.setTitle("\(i)", for: .normal)
+            thrirdLineButton.tag = i
+            thrirdLineButton.addTarget(self, action: #selector(numberPressed(_:)), for: .touchUpInside)
             holder.addSubview(thrirdLineButton)
 
         }
@@ -143,8 +163,35 @@ class ViewController: UIViewController {
             forthLineButton.setTitleColor(.black, for: .normal)
             forthLineButton.backgroundColor = .orange
             forthLineButton.setTitle("\(i)", for: .normal)
+            forthLineButton.tag = i
+            forthLineButton.addTarget(self, action: #selector(numberPressed(_:)), for: .touchUpInside)
             holder.addSubview(forthLineButton)
 
         }
+        
+        resultArea.frame = CGRect(x: 40, y: clearButton.frame.origin.y - 100.0, width: view.frame.size.width - 40, height: 100)
+        holder.addSubview(resultArea)
+        
+        // Actions
+        
+        clearButton.addTarget(self, action: #selector(clearResult), for: .touchUpInside)
+        
+    }
+    
+    @objc func clearResult(){
+        resultArea.text = "0"
+    }
+    
+    @objc func numberPressed(_ sender: UIButton){
+        let tag = sender.tag
+        
+        if resultArea.text == "0"{
+            resultArea.text = "\(tag)"
+        } else if let operations = resultArea.text {
+            resultArea.text = "\(operations)\(tag)"
+        }
+        
+        
+    }
 }
-}
+

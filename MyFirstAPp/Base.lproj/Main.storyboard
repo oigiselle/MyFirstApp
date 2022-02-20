@@ -26,8 +26,10 @@
                         <color key="backgroundColor" systemColor="systemIndigoColor"/>
                         <constraints>
                             <constraint firstItem="f6R-TQ-bTH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="Jtm-c2-ELe"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="f6R-TQ-bTH" secondAttribute="trailing" id="Nyd-S2-c0l"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="f6R-TQ-bTH" secondAttribute="trailing" constant="8" id="S8Y-3T-Ese"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="f6R-TQ-bTH" secondAttribute="bottom" id="cJX-Lj-5c6"/>
+                            <constraint firstItem="f6R-TQ-bTH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="fBa-R2-20v"/>
                             <constraint firstItem="f6R-TQ-bTH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="mAD-G8-JJl"/>
                         </constraints>
                     </view>
