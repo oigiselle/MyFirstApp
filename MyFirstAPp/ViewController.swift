@@ -27,6 +27,7 @@ class ViewController: UIViewController {
         label.textColor = .white
         label.textAlignment = .right
         label.font = UIFont(name: "Arial", size: 50)
+        label.text = "0"
         return label
     }()
 
@@ -44,6 +45,14 @@ class ViewController: UIViewController {
     
     private func numberPad() {
         let buttonSize = view.frame.size.width / 5
+        
+    // clear button
+        let clearButton = UIButton(frame: CGRect(x:0, y: holder.frame.size.height-(buttonSize*5), width: buttonSize*3, height: buttonSize))
+            clearButton.setTitleColor(.red, for: .normal)
+            clearButton.backgroundColor = .systemMint
+            clearButton.setTitle("Clear", for: .normal)
+            holder.addSubview(clearButton)
+        
         
      // Operation buttons
         let equalButton = UIButton(frame: CGRect(x:buttonSize * CGFloat(2), y: holder.frame.size.height-buttonSize, width: buttonSize, height: buttonSize))
@@ -119,8 +128,6 @@ class ViewController: UIViewController {
             fractionButton.addTarget(self, action: #selector(operationPressed(_:)), for: .touchUpInside)
             holder.addSubview(fractionButton)
         
-        
-        
         let percentageButton = UIButton(frame: CGRect(x:buttonSize * CGFloat(4), y: holder.frame.size.height-(buttonSize*5), width: buttonSize, height: buttonSize))
             percentageButton.setTitleColor(.black, for: .normal)
             percentageButton.backgroundColor = .systemMint
@@ -138,7 +145,7 @@ class ViewController: UIViewController {
             holder.addSubview(rootButton)
         
         
-  // Number buttons
+  // Number 0 to 3 buttons
         	
         let zeroButton = UIButton(frame: CGRect(x:0, y: holder.frame.size.height-buttonSize, width: buttonSize*2, height: buttonSize))
             zeroButton.setTitleColor(.black, for: .normal)
@@ -172,13 +179,7 @@ class ViewController: UIViewController {
             threeButton.tag = 3
             threeButton.addTarget(self, action: #selector(numberPressed(_:)), for: .touchUpInside)
             holder.addSubview(threeButton)
-        
-        let clearButton = UIButton(frame: CGRect(x:0, y: holder.frame.size.height-(buttonSize*5), width: buttonSize*3, height: buttonSize))
-            clearButton.setTitleColor(.red, for: .normal)
-            clearButton.backgroundColor = .systemMint
-            clearButton.setTitle("Clear", for: .normal)
-            holder.addSubview(clearButton)
-        
+    
       
    // for loops used to avoid repetions on button numbers from 4 to 9
         for i in 4..<7{
@@ -201,6 +202,7 @@ class ViewController: UIViewController {
             forthLineButton.setTitle("\(i)", for: .normal)
             forthLineButton.tag = i
             forthLineButton.addTarget(self, action: #selector(numberPressed(_:)), for: .touchUpInside)
+          
             holder.addSubview(forthLineButton)
 
         }
